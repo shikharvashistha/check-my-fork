@@ -1,0 +1,41 @@
+name: boost-build
+'on':
+  push:
+    branches:
+      - main
+jobs:
+  Build:
+    runs-on: '${{ matrix.os }}'
+    strategy:
+      fail-fast: true
+      matrix:
+        os:
+          - ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Clone Boost super-project
+        run: git clone --recursive --jobs 8 https://github.com/boostorg/boost.git
+      - name: Switching to master branch
+        working-directory: boost/
+        run: git checkout master
+      - name: Updating master branch
+        working-directory: boost/
+        run: |
+          git checkout master
+          git pull
+          git submodule update --init --recursive --jobs 8
+      - name: Building B2 engine
+        working-directory: boost/
+        run: ./bootstrap.sh
+      - name: Switching to uBlas & Adding and Updating my fork
+        working-directory: boost/
+        run: |
+          cd libs/numeric/ublas
+          git remote add fork https://github.com/BoostGSoC21/ublas.git
+          git fetch fork
+      - name: Switching to features/gsoc21/shikhar
+        working-directory: boost/libs/numeric/ublas
+        run: git checkout features/gsoc21/shikhar
+      - name: Building whole project
+        working-directory: boost/
+        run: ./b2
