@@ -30,9 +30,9 @@ jobs:
           cd libs/numeric/ublas
           git remote add fork https://github.com/shikharvashistha/ublas.git
           git fetch fork
-      - name: Switching to features/gsoc21/shikhar
+      - name: Switching to feature/doc
         working-directory: boost/libs/numeric/ublas
-        run: git checkout origin feature/doc
+        run: git checkout remote feature/doc
       - name: Building B2 engine
         run: |
           git clone https://github.com/boostorg/build.git
