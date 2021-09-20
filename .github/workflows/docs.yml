@@ -34,8 +34,11 @@ jobs:
         working-directory: boost/libs/numeric/ublas
         run: git checkout features/gsoc21/shikhar
       - name: Building B2 engine
-        working-directory: boost/
-        run: ./bootstrap.sh --prefix=boost/libs/numeric/ublas/doc
+        run: |
+          git clone https://github.com/boostorg/build.git
+          cd build
+          ./bootstrap.sh
+          ./b2 install --prefix=../boost/libs/numeric/ublas/doc
       - name: Building docs
-        working-directory: boost/libs/numeric/ublas/doc
-        run: ./b2
+        working-directory: boost/libs/numeric/ublas/doc/bin
+        run: ./b2 -j 8 --toolset=gcc ../
