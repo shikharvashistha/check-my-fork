@@ -33,8 +33,9 @@ jobs:
       - name: Switching to feature/doc
         working-directory: boost/libs/numeric/ublas
         run: |
+          git remote update
           git fetch
-          git checkout feature/doc
+          git checkout --track origin/feature/doc
       - name: Building B2 engine
         run: |
           git clone https://github.com/boostorg/build.git
