@@ -24,18 +24,22 @@ jobs:
           git checkout master
           git pull
           git submodule update --init --recursive --jobs 8
+          sudo apt update
+          sudo apt upgrade
+          sudo apt install asciidoctor
       - name: Switching to uBlas & Adding and Updating my fork
         working-directory: boost/
         run: |
           cd libs/numeric/ublas
-          git remote add fork https://github.com/shikharvashistha/ublas.git
-          git fetch fork
-      - name: Switching to feature/doc
+ #         git remote add fork https://github.com/shikharvashistha/ublas.git
+ #         git fetch fork
+      - name: Switching to develop
         working-directory: boost/libs/numeric/ublas
         run: |
-          git remote update
-          git fetch
-          git checkout --track origin/feature/doc
+           git checkout develop
+   #       git remote update
+   #       git fetch
+   #       git checkout --track origin/develop
       - name: Building B2 engine
         run: |
           git clone https://github.com/boostorg/build.git
@@ -44,8 +48,4 @@ jobs:
           ./b2 install --prefix=../boost/libs/numeric/ublas/doc
       - name: Building docs
         working-directory: boost/libs/numeric/ublas/doc/bin
-        run: |
-          sudo apt update
-          sudo apt upgrade
-          sudo apt install asciidoctor
-          ./b2 -j 8 --toolset=gcc ../
+        run: ./b2 -j 8 --toolset=gcc ../
