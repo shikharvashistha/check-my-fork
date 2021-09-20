@@ -1,4 +1,4 @@
-name: boost-build
+name: docs
 'on':
   push:
     branches:
