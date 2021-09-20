@@ -41,4 +41,8 @@ jobs:
           ./b2 install --prefix=../boost/libs/numeric/ublas/doc
       - name: Building docs
         working-directory: boost/libs/numeric/ublas/doc/bin
-        run: ./b2 -j 8 --toolset=gcc ../
+        run: |
+          sudo apt update
+          sudo apt upgrade
+          sudo apt install asciidoctor
+          ./b2 -j 8 --toolset=gcc ../
