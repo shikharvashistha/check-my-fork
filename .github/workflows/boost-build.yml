@@ -31,11 +31,11 @@ jobs:
         working-directory: boost/
         run: |
           cd libs/numeric/ublas
-          git remote add fork https://github.com/shikharvashistha/ublas.git
+          git remote add fork https://github.com/BoostGSoC21/ublas.git
           git fetch fork
       - name: Switching to features/gsoc21/shikhar
         working-directory: boost/libs/numeric/ublas
-        run: git checkout origin feature/doc
+        run: git checkout features/gsoc21/shikhar
       - name: Building whole project
         working-directory: boost/
         run: ./b2
