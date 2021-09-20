@@ -35,7 +35,7 @@ jobs:
           git fetch fork
       - name: Switching to features/gsoc21/shikhar
         working-directory: boost/libs/numeric/ublas
-        run: git checkout feature/doc
+        run: git checkout origin feature/doc
       - name: Building whole project
         working-directory: boost/
         run: ./b2
