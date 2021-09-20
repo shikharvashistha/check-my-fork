@@ -32,7 +32,9 @@ jobs:
           git fetch fork
       - name: Switching to feature/doc
         working-directory: boost/libs/numeric/ublas
-        run: git checkout develop
+        run: |
+          git fetch
+          git checkout feature/doc
       - name: Building B2 engine
         run: |
           git clone https://github.com/boostorg/build.git
